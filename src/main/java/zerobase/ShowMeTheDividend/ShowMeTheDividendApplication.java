@@ -7,25 +7,20 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import zerobase.ShowMeTheDividend.model.Company;
 import zerobase.ShowMeTheDividend.scrapper.YahooFinanceScraper;
 
 import java.io.IOException;
 
 @SpringBootApplication
+@EnableScheduling // 스케쥴러 사용
+@EnableCaching // 캐시 기능 사용(캐시 서버 사용)
 public class ShowMeTheDividendApplication {
 
 	public static void main(String[] args) {
 		// # 앱 실행
-//		SpringApplication.run(ShowMeTheDividendApplication.class, args);
-
-		// # 웹스크래핑 테스트1
-		YahooFinanceScraper scraper = new YahooFinanceScraper();
-//		var result = scraper.scrap(Company.builder().ticker("COKE").build());
-		var result = scraper.scrapCompanyByTicker("COKE");
-		System.out.println(result);
-
-
+		SpringApplication.run(ShowMeTheDividendApplication.class, args);
 	}
-
 }

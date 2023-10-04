@@ -5,6 +5,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 import zerobase.ShowMeTheDividend.model.Company;
 import zerobase.ShowMeTheDividend.model.Dividend;
 import zerobase.ShowMeTheDividend.model.ScrapedResult;
@@ -15,13 +16,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class YahooFinanceScraper {
+@Component
+public class YahooFinanceScraper implements Scraper {
     private static final String URL = "https://finance.yahoo.com/quote/%s/history?period1=%d&period2=%d&interval=1mo";
     private static final String SUMMARY_URL = "https://finance.yahoo.com/quote/%s?p=%s";
 
     private static final long START_TIME = 86400;
 
     // # 회사의 배당금 정보 스크랩
+    @Override
     public ScrapedResult scrap(Company company){
         var scrapResult = new ScrapedResult();
         scrapResult.setCompany(company);
@@ -66,6 +69,7 @@ public class YahooFinanceScraper {
     }
 
     // # 회사의 이름 스크랩
+    @Override
     public Company scrapCompanyByTicker(String ticker){
         String url = String.format(SUMMARY_URL, ticker, ticker);
         try {
@@ -77,8 +81,8 @@ public class YahooFinanceScraper {
                     .name(title)
                     .build();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-//        return null;
+        return null;
     }
 }

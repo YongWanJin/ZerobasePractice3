@@ -24,23 +24,20 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
 
-	implementation group: 'com.h2database', name: 'h2', version: '1.4.200' // h2 DB
-	implementation group: 'org.jsoup', name: 'jsoup', version: '1.7.2' // 스크래핑용
+	// h2 DB
+	implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+	// 스크래핑용
+	implementation group: 'org.jsoup', name: 'jsoup', version: '1.7.2'
+	// 검색어 자동완성 기능 구현을 위한 Trie 자료구조 구현용
+	implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.3'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//	implementation 'org.springframework.boot:spring-boot-starter-web'
-//	compileOnly 'org.projectlombok:lombok'
-//	annotationProcessor 'org.projectlombok:lombok'
-//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
-//
-//tasks.named('test') {
-//	useJUnitPlatform()
-//}
 
 test {
 	useJUnitPlatform()

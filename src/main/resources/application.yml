@@ -19,3 +19,12 @@ spring:
     url: jdbc:h2:mem:yongwan;DB_CLOSE_DELAY=-1
     username: yongwan
     password:
+  cache:
+    type: redis
+  redis:
+    host: 43.202.116.172
+    port: 6379
+
+scheduler:
+  scrap:
+    yahoo: "0 0 0 * * *"
