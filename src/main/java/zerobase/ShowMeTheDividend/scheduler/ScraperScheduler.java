@@ -34,10 +34,9 @@ public class ScraperScheduler {
         // 2. 회사마다 배당금 정보를 스크래핑
         for (var company : companies) {
             log.info("현재 다음 회사의 스크래핑 진행중 : " + company.getCompanyName());
-            ScrapedResult scrapedResult = this.yahooFinanceScraper.scrap(Company.builder()
-                    .name(company.getCompanyName())
-                    .ticker(company.getTicker())
-                    .build());
+            ScrapedResult scrapedResult = this.yahooFinanceScraper.scrap(
+                    new Company(company.getTicker(), company.getCompanyName())
+            );
             // 3. DB에 존재하지 않는 값이 등장하면 저장하기
             scrapedResult.getDividendEntities().stream()
                     // dividend DTO를 dividend Entity로 변환

@@ -19,6 +19,8 @@ public class FinanceController {
     @GetMapping("/dividend/{companyName}")
     public ResponseEntity<?> searchFinance(@PathVariable String companyName){
         var result = this.financeService.getDividendByCompanyName(companyName);
+        // DB에서 데이터를 불러올때에는 잘 되지만,
+        // 캐시 서버에서 데이터를 불러올때 MismatchedInputException 에러가 발생한다.
         return ResponseEntity.ok(result);
     }
 }

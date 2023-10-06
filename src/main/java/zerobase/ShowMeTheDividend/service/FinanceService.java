@@ -14,6 +14,7 @@ import zerobase.ShowMeTheDividend.persist.entity.DividendEntity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -22,6 +23,8 @@ public class FinanceService {
     private final CompanyRepository companyRepository;
     private final DividendRepository dividendRepository;
 
+    /**
+     * */
     @Cacheable(key = "#companyName", value = "finance") // 캐시 사용
     public ScrapedResult getDividendByCompanyName(String companyName){
         // 1. 회사 이름을 기준으로 회사 정보를 조회한다.
@@ -37,19 +40,13 @@ public class FinanceService {
                 this.dividendRepository.findAllByCompanyId(companyEntity.getId());
 
         // 3. 결과들을 조합하고 반환한다.
-        List<Dividend> dividends = new ArrayList<>();
-        for(var entity : dividendEntities){
-            dividends.add(Dividend.builder()
-                    .date(entity.getDate())
-                    .dividend(entity.getDividend())
-                    .build());
-        }
+        List<Dividend> dividends = dividendEntities.stream()
+                .map(e -> new Dividend(e.getDate(), e.getDividend()))
+                .collect(Collectors.toList());
         return new ScrapedResult(
-                Company.builder()
-                        .ticker(companyEntity.getTicker())
-                        .name(companyEntity.getCompanyName())
-                        .build(),
-                dividends);
+                new Company(companyEntity.getTicker(), companyEntity.getCompanyName()),
+                dividends
+        );
     }
 
 }

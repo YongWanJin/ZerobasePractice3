@@ -22,8 +22,8 @@ spring:
   cache:
     type: redis
   redis:
-    host: 43.202.116.172
-    port: 6379
+    host: localhost
+    port: 16379
 
 scheduler:
   scrap:
