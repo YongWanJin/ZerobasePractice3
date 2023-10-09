@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 
@@ -19,9 +20,9 @@ import java.time.LocalDateTime;
 public class Dividend {
 //    private Long companyId;
 
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    // 직렬화, 역직렬화
+    @Autowired
+    @JsonSerialize(using = LocalDateTimeSerializer.class) // 직렬화에 쓰일 serializer 설정
+    @JsonDeserialize(using = LocalDateDeserializer.class) // 역직렬화에 쓰일 serializer 설정
     private LocalDateTime date;
 
     private String dividend;

@@ -2,6 +2,7 @@ package zerobase.ShowMeTheDividend.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 // Company객체와 Dividend객체<들>을 종합하여,
 // 최종 웹크롤링 결과를 담는 객체를 생성하는 클래스
 @Data
+//@NoArgsConstructor
 @AllArgsConstructor
 public class ScrapedResult {
     private Company company;

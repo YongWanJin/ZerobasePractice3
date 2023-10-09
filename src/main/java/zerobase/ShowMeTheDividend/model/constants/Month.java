@@ -1,6 +1,7 @@
 package zerobase.ShowMeTheDividend.model.constants;
 
-// 문자열로 된 월(month)을 숫자로 바꾸는데에 사용될 enum
+/** 문자열로 된 월(month)을 숫자로 바꾸는데에 사용될 enum
+ * */
 public enum Month {
 
     // 이 enum의 값은 다음과 같은 구조이다.

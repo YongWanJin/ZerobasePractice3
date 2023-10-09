@@ -98,6 +98,14 @@ public class CompanyService {
                 .collect(Collectors.toList());
     }
 
+    public String deleteCompany(String ticker) {
+        var company = this.companyRepository.findByTicker(ticker)
+                .orElseThrow(() -> new RuntimeException("The compnay doesn't exist!"));
+        this.dividendRepository.deleteAllByCompanyId(company.getId());
+        this.companyRepository.delete(company);
+        this.deleteAutoCompleteKeyword(company.getCompanyName());
+        return company.getCompanyName();
+    }
 }
 
 

@@ -1,19 +1,26 @@
 package zerobase.ShowMeTheDividend.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import zerobase.ShowMeTheDividend.persist.entity.MemberEntity;
 
 import java.util.List;
 
 public class Auth {
 
+    /** 로그인에 필요한 DTO 객체 생성
+     * */
     @Data
+    @NoArgsConstructor
     public static class SignIn {
         private String username;
         private String password;
     }
 
+    /** 회원가입에 필요한 DTO 객체 생성
+     * */
     @Data
+    @NoArgsConstructor
     public static class SignUp {
         private String username;
         private String password;
